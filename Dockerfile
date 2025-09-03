@@ -72,9 +72,22 @@ COPY --from=build /sqlpad/docker-entrypoint /
 COPY --from=build /sqlpad/server .
 
 ENV NODE_ENV production
-ENV SQLPAD_DB_PATH /var/lib/sqlpad
-ENV SQLPAD_PORT 3000
-EXPOSE 3000
+ENV SQLPAD_DB_PATH=/var/lib/sqlpad
+ENV SQLPAD_PORT=3030
+ENV SQLPAD_ADMIN=${SQLPAD_USER}
+ENV SQLPAD_ADMIN_PASSWORD=${SQLPAD_PASSWORD}
+ENV SQLPAD_TRUST_PROXY="true"
+ENV SQLPAD_BASE_URL="/dbadmin"
+ENV SQLPAD_PASSPHRASE=${SQLPAD_PASSWORD}-${SQLPAD_USER}-passphrase
+ENV SQLPAD_CONNECTIONS__postgres__name="Connected PostgreSQL DB"
+ENV SQLPAD_CONNECTIONS__postgres__driver=postgres
+ENV SQLPAD_CONNECTIONS__postgres__port="5432"
+ENV SQLPAD_CONNECTIONS__postgres__host=${POSTGRES_HOST}
+ENV SQLPAD_CONNECTIONS__postgres__database=${POSTGRES_DB}
+ENV SQLPAD_CONNECTIONS__postgres__username=${POSTGRES_USER}
+ENV SQLPAD_CONNECTIONS__postgres__password=${POSTGRES_PASSWORD}
+
+EXPOSE 3030
 ENTRYPOINT ["/docker-entrypoint"]
 
 # Things to think about for future docker builds
