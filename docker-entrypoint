@@ -1,5 +1,16 @@
 #!/bin/bash
 set -e
+
+# Export the env variables
+export SQLPAD_ADMIN="$SQLPAD_USER"
+export SQLPAD_ADMIN_PASSWORD="$SQLPAD_PASSWORD"
+export SQLPAD_PASSPHRASE="$SQLPAD_PASSWORD-$POSTGRES_DB-passphrase"
+export SQLPAD_CONNECTIONS__postgres__host="$POSTGRES_HOST"
+export SQLPAD_CONNECTIONS__postgres__database="$POSTGRES_DB"
+export SQLPAD_CONNECTIONS__postgres__username="$POSTGRES_USER"
+export SQLPAD_CONNECTIONS__postgres__password="$POSTGRES_PASSWORD"
+export SQLPAD_CONNECTIONS__postgres__port="$POSTGRES_PORT"
+
 # This iterates any sh file in the directory and executes them before our server starts
 # Note: we intentionally source the files, allowing scripts to set vars that override default behavior.
 if [ -d "/etc/docker-entrypoint.d" ]; then
