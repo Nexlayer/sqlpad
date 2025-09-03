@@ -11,7 +11,7 @@ import { api } from '../utilities/api';
 import useAppContext from '../utilities/use-app-context';
 
 function SignIn() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
   const { config } = useAppContext();
@@ -23,7 +23,7 @@ function SignIn() {
   const signIn = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const json = await api.post('/api/signin', { username, password });
+    const json = await api.post('/api/signin', { email, password });
     if (json.error) {
       return message.error('Username or password incorrect');
     }
@@ -37,21 +37,21 @@ function SignIn() {
 
   let placeholderText = '';
   if (config.ldapConfigured && config.localAuthConfigured) {
-    placeholderText = 'username';
+    placeholderText = 'username or email address';
   } else if (config.ldapConfigured) {
     placeholderText = 'username';
   } else if (config.localAuthConfigured) {
-    placeholderText = 'username';
+    placeholderText = 'email address';
   }
 
   const localLdapForm = (
     <form onSubmit={signIn}>
       <Input
-        name="username"
-        type="text"
+        name="email"
+        type="email"
         placeholder={placeholderText}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setUsername(e.target.value)
+          setEmail(e.target.value)
         }
         required
       />
