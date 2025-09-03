@@ -3,14 +3,7 @@
 name: docker-ci-tags
 
 on:
-  push:
-    branches:
-      - 'master'
-    tags:
-      - 'v*.*.*'
-  pull_request:
-    branches:
-      - 'master'
+	workflow_dispatch:  # Allow manual triggering
 
 jobs:
   docker:

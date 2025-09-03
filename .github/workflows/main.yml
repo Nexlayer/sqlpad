@@ -1,9 +1,7 @@
 name: SQLPad release
 
 on:
-  push:
-    tags:
-      - '*'
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   build:
