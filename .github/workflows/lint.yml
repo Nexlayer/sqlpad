@@ -1,7 +1,7 @@
 name: lint
 
 on:
-	workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:  # Allow manual triggering
 
 jobs:
   lint:
